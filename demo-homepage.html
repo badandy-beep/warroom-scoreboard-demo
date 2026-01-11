@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Noetic Dharma Group">
+    <meta name="copyright" content="© 2026 Noetic Dharma Group, LLC">
+    <title>War Room Midterm Scoreboard 2026 | The Battle for America's Sovereignty</title>
+    <!-- © 2026 Noetic Dharma Group, LLC | www.noeticdharma.com | CONFIDENTIAL & PROPRIETARY | Unauthorized use prohibited -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-white: #ffffff;
+            --secondary-gray: #f8fafc;
+            --card-bg: #ffffff;
+            --navy-dark: #1e3a5f;
+            --navy-medium: #2c5282;
+            --navy-light: #3182ce;
+            --gop-red: #c53030;
+            --gop-red-light: #e53e3e;
+            --dem-blue: #2563eb;
+            --accent-gold: #d69e2e;
+            --accent-gold-light: #ecc94b;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --border-dark: #cbd5e0;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #d69e2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--secondary-gray);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(30, 58, 95, 0.3);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .eagle-logo {
+            position: relative;
+            width: 70px;
+            height: 70px;
+        }
+
+        .eagle-shield {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .eagle-shield::before {
+            content: '🦅';
+            font-size: 2.5rem;
+            filter: grayscale(100%) brightness(0.3);
+        }
+
+        .flag-accent {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(180deg, 
+                var(--gop-red) 0%, var(--gop-red) 30%,
+                #fff 30%, #fff 40%,
+                var(--gop-red) 40%, var(--gop-red) 50%,
+                #fff 50%, #fff 60%,
+                var(--navy-dark) 60%);
+            border-radius: 3px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            color: #ffffff;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .logo-text .tagline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold-light);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .logo-text .host {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
+            margin-top: 0.25rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #48bb78;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px #48bb78;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+            padding: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold-light);
+        }
+
+        /* Subtitle Banner */
+        .subtitle-banner {
+            background: var(--gop-red);
+            padding: 0.6rem 2rem;
+            text-align: center;
+        }
+
+        .subtitle-banner h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Majority Tracker */
+        .majority-tracker {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .majority-tracker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gop-red) 0%, var(--accent-gold) 50%, var(--gop-red) 100%);
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tracker-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+        }
+
+        .countdown {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--gop-red);
+            font-weight: 600;
+        }
+
+        .chambers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .chamber-card {
+            background: var(--secondary-gray);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .chamber-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .chamber-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+        }
+
+        .chamber-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chamber-status.gop-control {
+            background: rgba(197, 48, 48, 0.15);
+            color: var(--gop-red);
+            border: 1px solid var(--gop-red);
+        }
+
+        .seat-counts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .seat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .seat-number.gop { color: var(--gop-red); }
+        .seat-number.dem { color: var(--dem-blue); }
+
+        .seat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .majority-line {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.03);
+            border-radius: 5px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .progress-gop {
+            background: linear-gradient(90deg, var(--gop-red) 0%, var(--gop-red-light) 100%);
+            transition: width 0.5s ease;
+        }
+
+        .progress-dem {
+            background: linear-gradient(90deg, #3b82f6 0%, var(--dem-blue) 100%);
+            transition: width 0.5s ease;
+        }
+
+        /* Section Styles */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title .icon {
+            font-size: 1.2rem;
+        }
+
+        .view-all {
+            font-size: 0.85rem;
+            color: var(--navy-medium);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .view-all:hover {
+            color: var(--gop-red);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Race Cards */
+        .battleground-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .race-cards-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .race-card {
+            background: var(--secondary-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: block;
+        }
+
+        .race-card:hover {
+            border-color: var(--navy-medium);
+            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .race-card.tossup {
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .race-card.lean-r {
+            border-left: 4px solid var(--gop-red);
+        }
+
+        .race-card.lean-d {
+            border-left: 4px solid var(--dem-blue);
+        }
+
+        .race-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .race-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--navy-dark);
+        }
+
+        .race-type {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .race-type.tossup {
+            background: rgba(214, 158, 46, 0.15);
+            color: var(--accent-gold);
+        }
+
+        .race-type.lean-r {
+            background: rgba(197, 48, 48, 0.15);
+            color: var(--gop-red);
+        }
+
+        .race-type.lean-d {
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--dem-blue);
+        }
+
+        .race-candidates {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .candidate-mini {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .candidate-mini.dem {
+            flex-direction: row-reverse;
+        }
+
+        .candidate-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .candidate-mini.gop .candidate-avatar {
+            background: linear-gradient(135deg, var(--gop-red) 0%, #9b2c2c 100%);
+            color: white;
+        }
+
+        .candidate-mini.dem .candidate-avatar {
+            background: linear-gradient(135deg, var(--dem-blue) 0%, #1e40af 100%);
+            color: white;
+        }
+
+        .candidate-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .candidate-name-mini {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        .candidate-poll {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .candidate-mini.gop .candidate-poll { color: var(--gop-red); }
+        .candidate-mini.dem .candidate-poll { color: var(--dem-blue); }
+        .candidate-mini.dem .candidate-info { text-align: right; }
+
+        .vs-indicator {
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        /* Movement Tracker */
+        .movement-tracker {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .movement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .movement-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--secondary-gray);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .movement-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .movement-icon.up {
+            background: rgba(56, 161, 105, 0.15);
+            color: var(--success);
+        }
+
+        .movement-icon.down {
+            background: rgba(229, 62, 62, 0.15);
+            color: var(--danger);
+        }
+
+        .movement-icon.alert {
+            background: rgba(214, 158, 46, 0.15);
+            color: var(--warning);
+        }
+
+        .movement-text {
+            flex: 1;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .movement-text strong {
+            color: var(--text-primary);
+        }
+
+        .movement-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* State Navigation */
+        .state-nav {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .state-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .state-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: var(--secondary-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            min-width: 70px;
+        }
+
+        .state-btn:hover {
+            border-color: var(--navy-medium);
+            background: white;
+        }
+
+        .state-btn.hot {
+            border-color: var(--gop-red);
+            background: rgba(197, 48, 48, 0.05);
+        }
+
+        .state-btn.hot::before {
+            content: '🔥';
+            font-size: 0.6rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .state-btn .abbrev {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            color: var(--navy-dark);
+        }
+
+        .state-btn .races {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        /* News Section */
+        .news-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .news-feed, .markets-feed {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .news-item {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .news-source {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--gop-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .news-headline {
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.25rem;
+        }
+
+        .news-headline a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .news-headline a:hover {
+            color: var(--navy-medium);
+        }
+
+        .news-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Markets */
+        .market-item {
+            padding: 1rem;
+            background: var(--secondary-gray);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .market-question {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .market-odds {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .gop-odds {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gop-red);
+        }
+
+        .dem-odds {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dem-blue);
+        }
+
+        .market-source {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--navy-dark);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+        }
+
+        .footer p:last-child {
+            color: var(--accent-gold-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-grid, .news-section {
+                grid-template-columns: 1fr;
+            }
+            .chambers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo-section">
+                <div class="eagle-logo">
+                    <div class="eagle-shield"></div>
+                    <div class="flag-accent"></div>
+                </div>
+                <div class="logo-text">
+                    <h1>WAR ROOM</h1>
+                    <span class="tagline">Midterm Scoreboard 2026</span>
+                    <span class="host">Hosted by Stephen K. Bannon</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="dashboard.html" style="color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 600; margin-right: 1rem;">← Dashboard</a>
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    LIVE DATA
+                </div>
+                <nav class="nav-links">
+                    <a href="#">Senate</a>
+                    <a href="#">House</a>
+                    <a href="#">Governors</a>
+                    <a href="#">Endorsements</a>
+                    <a href="#">Markets</a>
+                </nav>
+            </div>
+        </div>
+        <div class="subtitle-banner">
+            <h2>The Battle for America's Sovereignty</h2>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Path to Majority Tracker -->
+        <section class="majority-tracker">
+            <div class="tracker-header">
+                <h2 class="tracker-title">⭐ PATH TO MAJORITY</h2>
+                <div class="countdown">🗓️ 299 DAYS UNTIL ELECTION DAY</div>
+            </div>
+            <div class="chambers-grid">
+                <!-- Senate -->
+                <div class="chamber-card">
+                    <div class="chamber-header">
+                        <h3 class="chamber-name">🏛️ SENATE</h3>
+                        <span class="chamber-status gop-control">GOP Control</span>
+                    </div>
+                    <div class="seat-counts">
+                        <div>
+                            <div class="seat-number gop">53</div>
+                            <div class="seat-label">Republicans</div>
+                        </div>
+                        <div class="majority-line">51 needed for majority</div>
+                        <div>
+                            <div class="seat-number dem">47</div>
+                            <div class="seat-label">Democrats</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-gop" style="width: 53%;"></div>
+                        <div class="progress-dem" style="width: 47%;"></div>
+                    </div>
+                </div>
+                <!-- House -->
+                <div class="chamber-card">
+                    <div class="chamber-header">
+                        <h3 class="chamber-name">🏠 HOUSE</h3>
+                        <span class="chamber-status gop-control">GOP Control</span>
+                    </div>
+                    <div class="seat-counts">
+                        <div>
+                            <div class="seat-number gop">220</div>
+                            <div class="seat-label">Republicans</div>
+                        </div>
+                        <div class="majority-line">218 needed for majority</div>
+                        <div>
+                            <div class="seat-number dem">215</div>
+                            <div class="seat-label">Democrats</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-gop" style="width: 50.5%;"></div>
+                        <div class="progress-dem" style="width: 49.5%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Battleground Races + Movement Tracker -->
+        <div class="content-grid">
+            <section class="battleground-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">🎯</span>
+                        KEY BATTLEGROUND RACES
+                    </h2>
+                    <a href="#" class="view-all">View All Races →</a>
+                </div>
+                <div class="race-cards-grid">
+                    <!-- Georgia Senate -->
+                    <a href="demo-race-detail.html" class="race-card tossup">
+                        <div class="race-header">
+                            <span class="race-name">🍑 Georgia Senate</span>
+                            <span class="race-type tossup">Toss-Up</span>
+                        </div>
+                        <div class="race-candidates">
+                            <div class="candidate-mini gop">
+                                <div class="candidate-avatar">HW</div>
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">Herschel Walker</span>
+                                    <span class="candidate-poll">48.2%</span>
+                                </div>
+                            </div>
+                            <span class="vs-indicator">VS</span>
+                            <div class="candidate-mini dem">
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">TBD</span>
+                                    <span class="candidate-poll">47.1%</span>
+                                </div>
+                                <div class="candidate-avatar">?</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Michigan Senate -->
+                    <a href="#" class="race-card tossup">
+                        <div class="race-header">
+                            <span class="race-name">🚗 Michigan Senate</span>
+                            <span class="race-type tossup">Toss-Up</span>
+                        </div>
+                        <div class="race-candidates">
+                            <div class="candidate-mini gop">
+                                <div class="candidate-avatar">MR</div>
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">Mike Rogers</span>
+                                    <span class="candidate-poll">46.8%</span>
+                                </div>
+                            </div>
+                            <span class="vs-indicator">VS</span>
+                            <div class="candidate-mini dem">
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">Gary Peters</span>
+                                    <span class="candidate-poll">48.4%</span>
+                                </div>
+                                <div class="candidate-avatar">GP</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Texas Senate -->
+                    <a href="#" class="race-card lean-r">
+                        <div class="race-header">
+                            <span class="race-name">🤠 Texas Senate</span>
+                            <span class="race-type lean-r">Lean R</span>
+                        </div>
+                        <div class="race-candidates">
+                            <div class="candidate-mini gop">
+                                <div class="candidate-avatar">TC</div>
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">Ted Cruz</span>
+                                    <span class="candidate-poll">51.2%</span>
+                                </div>
+                            </div>
+                            <span class="vs-indicator">VS</span>
+                            <div class="candidate-mini dem">
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">TBD</span>
+                                    <span class="candidate-poll">44.3%</span>
+                                </div>
+                                <div class="candidate-avatar">?</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Virginia Senate -->
+                    <a href="#" class="race-card tossup">
+                        <div class="race-header">
+                            <span class="race-name">🏛️ Virginia Senate</span>
+                            <span class="race-type tossup">Toss-Up</span>
+                        </div>
+                        <div class="race-candidates">
+                            <div class="candidate-mini gop">
+                                <div class="candidate-avatar">?</div>
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">TBD</span>
+                                    <span class="candidate-poll">45.6%</span>
+                                </div>
+                            </div>
+                            <span class="vs-indicator">VS</span>
+                            <div class="candidate-mini dem">
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">Tim Kaine</span>
+                                    <span class="candidate-poll">49.8%</span>
+                                </div>
+                                <div class="candidate-avatar">TK</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- North Carolina Senate -->
+                    <a href="#" class="race-card tossup">
+                        <div class="race-header">
+                            <span class="race-name">🌲 North Carolina Senate</span>
+                            <span class="race-type tossup">Toss-Up</span>
+                        </div>
+                        <div class="race-candidates">
+                            <div class="candidate-mini gop">
+                                <div class="candidate-avatar">TT</div>
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">Thom Tillis</span>
+                                    <span class="candidate-poll">47.9%</span>
+                                </div>
+                            </div>
+                            <span class="vs-indicator">VS</span>
+                            <div class="candidate-mini dem">
+                                <div class="candidate-info">
+                                    <span class="candidate-name-mini">TBD</span>
+                                    <span class="candidate-poll">46.2%</span>
+                                </div>
+                                <div class="candidate-avatar">?</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Movement Tracker -->
+            <section class="movement-tracker">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">📊</span>
+                        RECENT MOVEMENTS
+                    </h2>
+                </div>
+                <div class="movement-list">
+                    <div class="movement-item">
+                        <div class="movement-icon up">↑</div>
+                        <div class="movement-text">
+                            <strong>GA Senate</strong> shifts +2.1 toward GOP
+                        </div>
+                        <span class="movement-time">2h ago</span>
+                    </div>
+                    <div class="movement-item">
+                        <div class="movement-icon down">↓</div>
+                        <div class="movement-text">
+                            <strong>MI Senate</strong> tightens, now within margin
+                        </div>
+                        <span class="movement-time">5h ago</span>
+                    </div>
+                    <div class="movement-item">
+                        <div class="movement-icon alert">⚠</div>
+                        <div class="movement-text">
+                            <strong>Trump endorses</strong> Walker in GA
+                        </div>
+                        <span class="movement-time">1d ago</span>
+                    </div>
+                    <div class="movement-item">
+                        <div class="movement-icon up">↑</div>
+                        <div class="movement-text">
+                            <strong>Polymarket</strong> GOP Senate +3%
+                        </div>
+                        <span class="movement-time">1d ago</span>
+                    </div>
+                    <div class="movement-item">
+                        <div class="movement-icon alert">⚠</div>
+                        <div class="movement-text">
+                            <strong>CHD endorses</strong> health freedom candidates
+                        </div>
+                        <span class="movement-time">2d ago</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- State Navigation -->
+        <section class="state-nav">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="icon">🗺️</span>
+                    BROWSE BY STATE
+                </h2>
+                <a href="#" class="view-all">View All States →</a>
+            </div>
+            <div class="state-grid">
+                <a href="#" class="state-btn hot"><span class="abbrev">GA</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn hot"><span class="abbrev">MI</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn hot"><span class="abbrev">NC</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn hot"><span class="abbrev">TX</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn hot"><span class="abbrev">VA</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn"><span class="abbrev">OH</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn"><span class="abbrev">ME</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn"><span class="abbrev">MN</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn"><span class="abbrev">NH</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn"><span class="abbrev">NE</span><span class="races">Senate</span></a>
+                <a href="#" class="state-btn"><span class="abbrev">CA</span><span class="races">Governor</span></a>
+                <a href="#" class="state-btn"><span class="abbrev">FL</span><span class="races">Governor</span></a>
+            </div>
+        </section>
+
+        <!-- News & Markets -->
+        <div class="news-section">
+            <!-- News Feed -->
+            <section class="news-feed">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">📰</span>
+                        LATEST NEWS
+                    </h2>
+                    <a href="#" class="view-all">All News →</a>
+                </div>
+                <div class="news-list">
+                    <div class="news-item">
+                        <div class="news-source">Breitbart</div>
+                        <h4 class="news-headline"><a href="#">Trump Rally in Georgia Draws Record Crowd, Endorses Walker</a></h4>
+                        <span class="news-time">2 hours ago</span>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-source">Daily Wire</div>
+                        <h4 class="news-headline"><a href="#">Poll: GOP Leads Generic Ballot by 4 Points Heading Into 2026</a></h4>
+                        <span class="news-time">5 hours ago</span>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-source">War Room</div>
+                        <h4 class="news-headline"><a href="#">Bannon: "Michigan Is The Firewall — We Cannot Lose"</a></h4>
+                        <span class="news-time">8 hours ago</span>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-source">Rasmussen</div>
+                        <h4 class="news-headline"><a href="#">Daily Tracking: Trump Approval at 52%, Highest Since Inauguration</a></h4>
+                        <span class="news-time">1 day ago</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prediction Markets -->
+            <section class="markets-feed">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">📈</span>
+                        PREDICTION MARKETS
+                    </h2>
+                </div>
+                <div class="market-item">
+                    <div class="market-question">GOP controls Senate after 2026?</div>
+                    <div class="market-odds">
+                        <span class="gop-odds">62%</span>
+                        <span class="dem-odds">38%</span>
+                    </div>
+                    <div class="market-source">Polymarket • Updated 5 min ago</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-question">GOP controls House after 2026?</div>
+                    <div class="market-odds">
+                        <span class="gop-odds">58%</span>
+                        <span class="dem-odds">42%</span>
+                    </div>
+                    <div class="market-source">PredictIt • Updated 10 min ago</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-question">GA Senate: Walker wins?</div>
+                    <div class="market-odds">
+                        <span class="gop-odds">51%</span>
+                        <span class="dem-odds">49%</span>
+                    </div>
+                    <div class="market-source">Polymarket • Updated 15 min ago</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>WAR ROOM SCOREBOARD © 2026 • Data sources: FEC, Polymarket, PredictIt, RealClearPolitics, NewsAPI</p>
+        <p>Powered by War Room • Stephen K. Bannon • America First</p>
+    </footer>
+
+    <script>
+        console.log('© 2026 Noetic Dharma Group, LLC | www.noeticdharma.com | CONFIDENTIAL & PROPRIETARY | This application and its source code are proprietary. Unauthorized access, use, reproduction, or distribution is strictly prohibited.');
+        
+        // Check authentication
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

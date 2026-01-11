@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Overview | War Room Scoreboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #1e3a5f;
+            --navy-medium: #2c5282;
+            --gop-red: #c53030;
+            --accent-gold: #d69e2e;
+            --success: #38a169;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            padding: 1rem 2rem;
+        }
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover { color: var(--accent-gold); }
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: white;
+        }
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--gop-red);
+        }
+        .section h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: var(--navy-medium);
+            margin: 1.5rem 0 0.75rem;
+        }
+        .section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .section ul {
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        .hero-section h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+        }
+        .hero-section .tagline {
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+        .hero-section p {
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .highlight-box {
+            background: rgba(214, 158, 46, 0.1);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-primary);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .stat-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--navy-dark);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .influencer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        .influencer-badge {
+            text-align: center;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--navy-dark);
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--border-color);
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--gop-red);
+            border-radius: 50%;
+            transform: translateX(-4.5px);
+        }
+        .timeline-date {
+            font-weight: 700;
+            color: var(--navy-dark);
+        }
+        .timeline-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+            <h1>🦅 WAR ROOM SCOREBOARD</h1>
+            <div></div>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <h1>WAR ROOM MIDTERM SCOREBOARD 2026</h1>
+        <p class="tagline">The Battle for America's Sovereignty</p>
+        <p>
+            The definitive political intelligence platform for the 2026 midterm elections. 
+            A Bloomberg Terminal for political warfare - giving the MAGA movement an unprecedented information advantage.
+        </p>
+    </div>
+
+    <main class="main-content">
+        <!-- Executive Summary -->
+        <section class="section">
+            <h2>📋 Executive Summary</h2>
+            <p>
+                The War Room Midterm Scoreboard aggregates real-time data from <strong>15+ API sources</strong> into a single command center, 
+                combining polling, prediction markets, campaign finance, social sentiment, and a proprietary 
+                <strong>MAGA Influencer Endorsement Tracker</strong> in one destination branded exclusively for War Room.
+            </p>
+            <div class="highlight-box">
+                <p>
+                    <strong>No platform like this currently exists.</strong> Cook Political Report and RealClearPolitics serve the establishment. 
+                    FiveThirtyEight is openly hostile. The War Room Scoreboard fills this gap with a platform built from our perspective, for our movement.
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">15+</div>
+                    <div class="stat-label">API Data Sources</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">85+</div>
+                    <div class="stat-label">Races Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12+</div>
+                    <div class="stat-label">Influencers Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">Real-time</div>
+                    <div class="stat-label">Data Updates</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem -->
+        <section class="section">
+            <h2>🎯 The Problem We Solve</h2>
+            <p>Right now, there is no single destination for MAGA-aligned voters and activists to:</p>
+            <ul>
+                <li>See the full landscape of the 2026 midterms at a glance</li>
+                <li>Know which candidates are truly America First vs. Trojan Horses</li>
+                <li>Track who Trump, Bannon, Tucker, and other trusted voices endorse</li>
+                <li>Follow the money - who funds these candidates and where loyalties lie</li>
+                <li>See real-time prediction market odds alongside traditional polling</li>
+                <li>Get MAHA ratings on health freedom positions</li>
+            </ul>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section">
+            <h2>⭐ Key Features</h2>
+            
+            <h3>🏠 Homepage: The Command Center</h3>
+            <ul>
+                <li><strong>Path to Majority Tracker</strong> - Real-time Senate/House seat counts with visual progress</li>
+                <li><strong>Key Battleground Races</strong> - Top 10 toss-up races with live polling</li>
+                <li><strong>Recent Movements Feed</strong> - Poll shifts, endorsements, market swings</li>
+                <li><strong>State Navigation Grid</strong> - Click any state to see all races</li>
+                <li><strong>Prediction Markets Dashboard</strong> - Overall control odds from Polymarket/PredictIt</li>
+                <li><strong>War Room News Integration</strong> - Latest episodes and clips</li>
+            </ul>
+
+            <h3>📊 Race Detail Pages: Side-by-Side Intelligence</h3>
+            <ul>
+                <li><strong>MAGA Score</strong> (0-100) - Proprietary alignment rating</li>
+                <li><strong>MAHA Rating</strong> - Health freedom score from MAHA Daily</li>
+                <li><strong>Trojan Horse Warning System</strong> - Automatic red flags</li>
+                <li><strong>Influencer Endorsement Grid</strong> - Visual tracker of who supports who</li>
+                <li><strong>War Room Endorsement Status</strong> - Official Bannon position</li>
+                <li><strong>Campaign Finance Deep Dive</strong> - FEC data, PAC money, donor analysis</li>
+                <li><strong>Six Live Data Panels</strong> - Polls, Markets, Social, Trends, News, Money</li>
+            </ul>
+        </section>
+
+        <!-- Influencer Tracker -->
+        <section class="section">
+            <h2>🎙️ MAGA Influencer Endorsement Tracker</h2>
+            <p>
+                <strong>This is the killer feature no other platform has.</strong> Voters make decisions based on who they trust. 
+                The Scoreboard tracks endorsements from all major MAGA voices:
+            </p>
+            <div class="influencer-grid">
+                <div class="influencer-badge">🏆 Trump</div>
+                <div class="influencer-badge">🎙️ Bannon</div>
+                <div class="influencer-badge">📺 Tucker</div>
+                <div class="influencer-badge">💪 Don Jr.</div>
+                <div class="influencer-badge">🚀 Elon</div>
+                <div class="influencer-badge">📻 Bongino</div>
+                <div class="influencer-badge">🎯 Megyn Kelly</div>
+                <div class="influencer-badge">📺 Ingraham</div>
+                <div class="influencer-badge">⚡ Alex Jones</div>
+                <div class="influencer-badge">🎖️ Sean Ryan</div>
+                <div class="influencer-badge">🔥 Candace</div>
+                <div class="influencer-badge">🏫 Charlie Kirk</div>
+            </div>
+            <div class="highlight-box">
+                <p>
+                    <strong>When influencers disagree, we highlight it.</strong> If Trump endorses one candidate but Bannon supports another in a primary, 
+                    that conflict is surfaced prominently - turning it into editorial content and driving engagement.
+                </p>
+            </div>
+        </section>
+
+        <!-- MAGA Score -->
+        <section class="section">
+            <h2>📈 MAGA Score System</h2>
+            <p>Proprietary 0-100 rating based on:</p>
+            <ul>
+                <li><strong>Trump endorsement status</strong> (weighted heavily)</li>
+                <li><strong>Voting record alignment</strong> with America First agenda</li>
+                <li><strong>Donor composition</strong> (grassroots % vs. corporate/PAC %)</li>
+                <li><strong>Public statements</strong> on key issues</li>
+                <li><strong>Associations</strong> with MAGA figures vs. establishment</li>
+            </ul>
+            <p style="margin-top: 1rem;">
+                <strong>Score Ranges:</strong> 
+                <span style="color: var(--success);">● 80-100: Strong MAGA</span> | 
+                <span style="color: var(--accent-gold);">● 50-79: Mixed/Questionable</span> | 
+                <span style="color: var(--gop-red);">● 0-49: Establishment/Opposition</span>
+            </p>
+        </section>
+
+        <!-- Trojan Horse -->
+        <section class="section">
+            <h2>⚠️ Trojan Horse Warning System</h2>
+            <p>Automatic red flags triggered when:</p>
+            <ul>
+                <li>Voting record contradicts campaign rhetoric</li>
+                <li>Heavy establishment/corporate PAC funding (over 50%)</li>
+                <li>Past statements contradict current positions</li>
+                <li>Connections to anti-MAGA organizations or donors</li>
+                <li>Endorsed by establishment figures who oppose Trump</li>
+                <li>Donor ties to Soros network, BlackRock, etc.</li>
+            </ul>
+        </section>
+
+        <!-- Timeline -->
+        <section class="section">
+            <h2>📅 Development Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 1: Design Approval</div>
+                    <div class="timeline-text">Finalize branding, approve mockups, lock feature scope</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Weeks 2-4: Frontend Development</div>
+                    <div class="timeline-text">Build React/Next.js components, routing, responsive design</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Weeks 5-7: Backend & API Integration</div>
+                    <div class="timeline-text">Connect all 15+ data sources, build database, caching layer</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Weeks 8-9: Data Population & Testing</div>
+                    <div class="timeline-text">Populate all 85+ races, QA testing, security review</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">March 2026: Soft Launch</div>
+                    <div class="timeline-text">Live platform with ongoing iteration</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why War Room -->
+        <section class="section">
+            <h2>🦅 Why War Room</h2>
+            <ul>
+                <li><strong>Built-in audience</strong> of millions who trust War Room</li>
+                <li><strong>Branded as THE official</strong> MAGA election intelligence platform</li>
+                <li><strong>Creates daily content</strong> opportunities (race updates, endorsement news)</li>
+                <li><strong>Drives engagement</strong> and donations to endorsed candidates</li>
+                <li><strong>Establishes War Room as kingmaker</strong> with documented scoreboard</li>
+                <li><strong>Unique asset</strong> no competitor has</li>
+                <li><strong>Legacy beyond 2026</strong> - becomes permanent election infrastructure</li>
+            </ul>
+        </section>
+
+        <!-- Budget -->
+        <section class="section">
+            <h2>💰 Budget Estimates</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$200</div>
+                    <div class="stat-label">Tier 1: MVP/month</div>
+                </div>
+                <div class="stat-card" style="border-color: var(--success); background: rgba(56,161,105,0.05);">
+                    <div class="stat-value">$1,750</div>
+                    <div class="stat-label">Tier 2: Pro/month ⭐</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$10K+</div>
+                    <div class="stat-label">Tier 3: Enterprise/month</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary);">
+                Development costs quoted separately. Recommend starting Tier 2 at launch.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>
+            <strong>CONFIDENTIAL & PROPRIETARY</strong><br>
+            © 2026 Noetic Dharma Group, LLC | Teton Village, Wyoming<br>
+            <a href="https://www.noeticdharma.com" target="_blank" style="color: var(--navy-medium);">www.noeticdharma.com</a>
+        </p>
+    </footer>
+
+    <script>
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

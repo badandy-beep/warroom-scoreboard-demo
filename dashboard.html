@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>War Room Scoreboard | Confidential Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #1e3a5f;
+            --navy-medium: #2c5282;
+            --gop-red: #c53030;
+            --accent-gold: #d69e2e;
+            --success: #38a169;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(30, 58, 95, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .logo-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            color: white;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .subtitle-banner {
+            background: var(--gop-red);
+            padding: 0.6rem 2rem;
+            text-align: center;
+        }
+
+        .subtitle-banner h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            color: white;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .welcome-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-icon.demo { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%); }
+        .card-icon.data { background: linear-gradient(135deg, var(--success) 0%, #276749 100%); }
+        .card-icon.polls { background: linear-gradient(135deg, var(--gop-red) 0%, #9b2c2c 100%); }
+        .card-icon.markets { background: linear-gradient(135deg, var(--accent-gold) 0%, #b7791f 100%); }
+        .card-icon.deck { background: linear-gradient(135deg, #805ad5 0%, #553c9a 100%); }
+
+        .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+        }
+
+        .card-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .card-link:hover {
+            background: var(--navy-dark);
+            color: white;
+            border-color: var(--navy-dark);
+        }
+
+        .card-link .arrow {
+            margin-left: auto;
+            opacity: 0.5;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.live {
+            background: rgba(56, 161, 105, 0.15);
+            color: var(--success);
+        }
+
+        .status-badge.demo {
+            background: rgba(214, 158, 46, 0.15);
+            color: var(--accent-gold);
+        }
+
+        .full-width-card {
+            grid-column: 1 / -1;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .feature-item .check {
+            color: var(--success);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .footer a {
+            color: var(--navy-medium);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <span class="logo-icon">🦅</span>
+                <div class="logo-text">
+                    <h1>WAR ROOM SCOREBOARD</h1>
+                    <span>Confidential Demo Portal</span>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="logout()">🔒 Logout</button>
+        </div>
+    </header>
+
+    <div class="subtitle-banner">
+        <h2>The Battle for America's Sovereignty • Midterms 2026</h2>
+    </div>
+
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h2>👋 Welcome to the Confidential Preview</h2>
+            <p>
+                This secure portal contains the complete demonstration of the <strong>War Room Midterm Scoreboard 2026</strong> platform. 
+                Below you'll find interactive mockups, data source documentation, and the full project overview. 
+                All materials are confidential and prepared exclusively for Steve Bannon and the War Room team.
+            </p>
+            <div class="features-list">
+                <div class="feature-item"><span class="check">✓</span> Interactive Platform Demos</div>
+                <div class="feature-item"><span class="check">✓</span> 15+ API Data Sources</div>
+                <div class="feature-item"><span class="check">✓</span> Polling Aggregation</div>
+                <div class="feature-item"><span class="check">✓</span> Prediction Markets</div>
+                <div class="feature-item"><span class="check">✓</span> MAGA Influencer Tracker</div>
+                <div class="feature-item"><span class="check">✓</span> Campaign Finance Data</div>
+            </div>
+        </section>
+
+        <!-- Main Cards Grid -->
+        <div class="section-grid">
+            <!-- Platform Demo Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon demo">📺</div>
+                    <div>
+                        <h3 class="card-title">Platform Demo</h3>
+                        <p class="card-subtitle">Interactive UI Mockups</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>See the fully designed platform in action. These mockups show exactly how the scoreboard will look and function.</p>
+                    <div class="card-links">
+                        <a href="demo-homepage.html" class="card-link">
+                            🏠 Homepage / Command Center
+                            <span class="status-badge demo">Demo</span>
+                            <span class="arrow">→</span>
+                        </a>
+                        <a href="demo-race-detail.html" class="card-link">
+                            📊 Race Detail Page (GA Senate)
+                            <span class="status-badge demo">Demo</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Sources Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon data">🔌</div>
+                    <div>
+                        <h3 class="card-title">Data Sources</h3>
+                        <p class="card-subtitle">API Feeds & Integrations</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Complete documentation of all 15+ data sources that power the platform, including costs and capabilities.</p>
+                    <div class="card-links">
+                        <a href="data-sources.html" class="card-link">
+                            📡 All API Feeds & Descriptions
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Polling Sources Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon polls">📈</div>
+                    <div>
+                        <h3 class="card-title">Polling Sources</h3>
+                        <p class="card-subtitle">Traditional & Alternative</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>All polling sources aggregated including RealClearPolitics, Rasmussen, Trafalgar, and more.</p>
+                    <div class="card-links">
+                        <a href="polling-sources.html" class="card-link">
+                            🗳️ View All Polling Sources
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prediction Markets Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon markets">💹</div>
+                    <div>
+                        <h3 class="card-title">Prediction Markets</h3>
+                        <p class="card-subtitle">Real-Money Forecasts</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Polymarket, PredictIt, Kalshi and other prediction market integrations with real-time odds.</p>
+                    <div class="card-links">
+                        <a href="prediction-markets.html" class="card-link">
+                            🎰 View Prediction Markets
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Project Overview Card -->
+            <div class="card full-width-card">
+                <div class="card-header">
+                    <div class="card-icon deck">📋</div>
+                    <div>
+                        <h3 class="card-title">Complete Project Overview</h3>
+                        <p class="card-subtitle">Executive Summary & Specifications</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>
+                        The full pitch deck including executive summary, complete feature list, all data displayed per candidate, 
+                        MAGA Score methodology, Trojan Horse Warning System, Influencer Endorsement Tracker details, 
+                        tech stack, timeline, and budget estimates.
+                    </p>
+                    <div class="card-links" style="flex-direction: row; flex-wrap: wrap;">
+                        <a href="pitch-deck.html" class="card-link" style="flex: 1; min-width: 250px;">
+                            📑 Full Pitch Deck
+                            <span class="arrow">→</span>
+                        </a>
+                        <a href="candidate-data.html" class="card-link" style="flex: 1; min-width: 250px;">
+                            👤 All Candidate Data Displayed
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>
+            <strong>CONFIDENTIAL & PROPRIETARY</strong><br>
+            © 2026 <a href="https://www.noeticdharma.com" target="_blank">Noetic Dharma Group, LLC</a> | Teton Village, Wyoming<br>
+            Unauthorized distribution prohibited.
+        </p>
+    </footer>
+
+    <script>
+        // Check authentication
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('authenticated');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

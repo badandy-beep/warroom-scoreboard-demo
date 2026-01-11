@@ -1,0 +1,33 @@
+WAR ROOM SCOREBOARD 2026 - DEMO PORTAL
+================================================================================
+Project: WARROOM
+Created: 2026-Jan-11
+Prepared by: Noetic Dharma Group
+================================================================================
+
+CONTENTS:
+
+1. index.html - Password-protected landing page (PW: BANNON)
+2. dashboard.html - Main hub after login with all navigation
+3. demo-homepage.html - Interactive scoreboard homepage mockup
+4. demo-race-detail.html - Interactive race detail page (GA Senate)
+5. data-sources.html - All 15+ API feeds with descriptions and costs
+6. polling-sources.html - All traditional polling sources documented
+7. prediction-markets.html - Polymarket, PredictIt, Kalshi documentation
+8. pitch-deck.html - Full project overview / executive summary
+9. candidate-data.html - Complete list of all data displayed per candidate
+10. README.md - GitHub repository documentation
+
+DEPLOYMENT:
+- Platform: Vercel (free tier works)
+- Domains: magamidterms2026.com, bannonmidterms2026.com
+- Authentication: Client-side password (BANNON)
+
+NOTES:
+- All pages require authentication via sessionStorage
+- Static HTML/CSS/JS - no build step required
+- Ready for immediate deployment
+
+================================================================================
+CONFIDENTIAL & PROPRIETARY © 2026 Noetic Dharma Group, LLC
+================================================================================

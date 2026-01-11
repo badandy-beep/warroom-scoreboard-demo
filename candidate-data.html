@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Candidate Data | War Room Scoreboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #1e3a5f;
+            --navy-medium: #2c5282;
+            --gop-red: #c53030;
+            --accent-gold: #d69e2e;
+            --success: #38a169;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            padding: 1rem 2rem;
+        }
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover { color: var(--accent-gold); }
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: white;
+        }
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        .page-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .category {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        .category-header {
+            background: var(--navy-dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .category-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        .category-content {
+            padding: 1.5rem;
+        }
+        .data-list {
+            list-style: none;
+        }
+        .data-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .data-list li:last-child {
+            border-bottom: none;
+        }
+        .data-list .icon {
+            flex-shrink: 0;
+            width: 24px;
+            text-align: center;
+        }
+        .data-list .text {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .data-list strong {
+            color: var(--text-primary);
+        }
+        .sub-list {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .sub-list li {
+            padding: 0.25rem 0;
+            border-bottom: none;
+        }
+        .highlight-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 0.5rem;
+        }
+        .badge-new {
+            background: rgba(56, 161, 105, 0.15);
+            color: var(--success);
+        }
+        .badge-proprietary {
+            background: rgba(214, 158, 46, 0.15);
+            color: var(--accent-gold);
+        }
+        .badge-premium {
+            background: rgba(197, 48, 48, 0.15);
+            color: var(--gop-red);
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+            <h1>🦅 WAR ROOM SCOREBOARD</h1>
+            <div></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>👤 All Candidate Data Displayed</h1>
+            <p>Complete list of every data point shown for each candidate on the War Room Scoreboard</p>
+        </div>
+
+        <!-- Candidate Profile -->
+        <div class="category">
+            <div class="category-header">
+                <span>📋</span>
+                <h2>Candidate Profile Data</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">👤</span><span class="text"><strong>Full name</strong>, photo, party affiliation</span></li>
+                    <li><span class="icon">🏛️</span><span class="text"><strong>Current office held</strong> (if incumbent)</span></li>
+                    <li><span class="icon">📜</span><span class="text"><strong>Previous offices</strong> and political history</span></li>
+                    <li><span class="icon">📅</span><span class="text"><strong>Age</strong>, hometown, education background</span></li>
+                    <li><span class="icon">🔗</span><span class="text"><strong>Campaign website</strong> and social media links</span></li>
+                    <li><span class="icon">📖</span><span class="text"><strong>Brief biography</strong> and career summary</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Polling Data -->
+        <div class="category">
+            <div class="category-header">
+                <span>📊</span>
+                <h2>Polling Data (Real-Time Aggregation)</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">📈</span><span class="text"><strong>RealClearPolitics polling average</strong></span></li>
+                    <li><span class="icon">⭐</span><span class="text"><strong>Specialized Rasmussen Reports</strong> tracking polls (likely voter model) <span class="highlight-badge badge-premium">Premium</span></span></li>
+                    <li><span class="icon">🎯</span><span class="text"><strong>Trafalgar Group polls</strong> (known for accurate GOP turnout modeling)</span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>Emerson College polls</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>InsiderAdvantage polls</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>Morning Consult</strong> state tracking</span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>All other publicly available</strong> race-specific polls</span></li>
+                    <li><span class="icon">📉</span><span class="text"><strong>Poll trend charts</strong> (30-day, 90-day, since announcement)</span></li>
+                    <li><span class="icon">🆚</span><span class="text"><strong>Head-to-head matchup history</strong></span></li>
+                    <li><span class="icon">🗳️</span><span class="text"><strong>Generic ballot correlation</strong> to race</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Prediction Markets -->
+        <div class="category">
+            <div class="category-header">
+                <span>📈</span>
+                <h2>Prediction Markets (Live Odds)</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">💎</span><span class="text"><strong>Polymarket</strong> real-time odds (percentage chance to win)</span></li>
+                    <li><span class="icon">💰</span><span class="text"><strong>PredictIt</strong> contract prices (cents on the dollar)</span></li>
+                    <li><span class="icon">⚖️</span><span class="text"><strong>Kalshi</strong> election markets (where available)</span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>24-hour change</strong> indicators</span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>7-day change</strong> indicators</span></li>
+                    <li><span class="icon">📈</span><span class="text"><strong>30-day trend charts</strong></span></li>
+                    <li><span class="icon">📜</span><span class="text"><strong>Historical odds movement</strong> since market opened</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MAGA Influencer Endorsements -->
+        <div class="category">
+            <div class="category-header">
+                <span>🎙️</span>
+                <h2>MAGA Influencer Endorsement Tracker <span class="highlight-badge badge-proprietary">Proprietary</span></h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">🏆</span><span class="text"><strong>Donald J. Trump</strong> endorsement status (Yes/No/Pending)</span></li>
+                    <li><span class="icon">🎙️</span><span class="text"><strong>Steve Bannon / War Room</strong> endorsement status</span></li>
+                    <li><span class="icon">📺</span><span class="text"><strong>Tucker Carlson</strong> endorsement or coverage</span></li>
+                    <li><span class="icon">💪</span><span class="text"><strong>Donald Trump Jr.</strong> endorsement</span></li>
+                    <li><span class="icon">🚀</span><span class="text"><strong>Elon Musk</strong> endorsement or public support</span></li>
+                    <li><span class="icon">📻</span><span class="text"><strong>Dan Bongino</strong> endorsement</span></li>
+                    <li><span class="icon">🎯</span><span class="text"><strong>Megyn Kelly</strong> endorsement or coverage</span></li>
+                    <li><span class="icon">📺</span><span class="text"><strong>Laura Ingraham</strong> endorsement or coverage</span></li>
+                    <li><span class="icon">⚡</span><span class="text"><strong>Alex Jones</strong> endorsement</span></li>
+                    <li><span class="icon">🎖️</span><span class="text"><strong>Sean Ryan Show</strong> endorsement</span></li>
+                    <li><span class="icon">🔥</span><span class="text"><strong>Candace Owens</strong> endorsement</span></li>
+                    <li><span class="icon">🏫</span><span class="text"><strong>Charlie Kirk / Turning Point USA</strong> endorsement</span></li>
+                    <li><span class="icon">🩺</span><span class="text"><strong>Children's Health Defense / RFK Jr.</strong> health freedom endorsement</span></li>
+                    <li><span class="icon">👶</span><span class="text"><strong>Susan B. Anthony Pro-Life America</strong> endorsement</span></li>
+                    <li><span class="icon">🔫</span><span class="text"><strong>NRA</strong> endorsement and rating</span></li>
+                    <li><span class="icon">📅</span><span class="text"><strong>Date of each endorsement</strong></span></li>
+                    <li><span class="icon">🔗</span><span class="text"><strong>Link to endorsement announcement</strong></span></li>
+                    <li><span class="icon">👁️</span><span class="text"><strong>Visual grid</strong> showing all endorsements at a glance</span></li>
+                    <li><span class="icon">⚠️</span><span class="text"><strong>CONFLICT ALERTS</strong> when influencers disagree on same race</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- War Room Status -->
+        <div class="category">
+            <div class="category-header">
+                <span>🦅</span>
+                <h2>War Room Endorsement Status <span class="highlight-badge badge-proprietary">Proprietary</span></h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">⭐</span><span class="text"><strong>Official War Room endorsement</strong> (Yes/No/Watch)</span></li>
+                    <li><span class="icon">📅</span><span class="text"><strong>Date of endorsement</strong></span></li>
+                    <li><span class="icon">🔗</span><span class="text"><strong>Link to War Room episode</strong> discussing candidate</span></li>
+                    <li><span class="icon">💬</span><span class="text"><strong>Bannon's stated position</strong> on candidate</span></li>
+                    <li><span class="icon">⚠️</span><span class="text"><strong>Any concerns or caveats</strong> noted</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MAGA Score -->
+        <div class="category">
+            <div class="category-header">
+                <span>📈</span>
+                <h2>MAGA Score (0-100) <span class="highlight-badge badge-proprietary">Proprietary</span></h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">🎯</span><span class="text"><strong>Overall MAGA alignment score</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>Score breakdown by category:</strong>
+                        <ul class="sub-list">
+                            <li>• Trump loyalty and endorsement status (weighted heavily)</li>
+                            <li>• Voting record alignment with America First agenda</li>
+                            <li>• Donor composition (grassroots % vs. corporate/PAC %)</li>
+                            <li>• Public statements on key issues</li>
+                            <li>• Associations with MAGA figures vs. establishment</li>
+                        </ul>
+                    </span></li>
+                    <li><span class="icon">🎨</span><span class="text"><strong>Score color coding:</strong> Green (80-100), Yellow (50-79), Red (0-49)</span></li>
+                    <li><span class="icon">🆚</span><span class="text"><strong>Comparison to opponent's score</strong></span></li>
+                    <li><span class="icon">📈</span><span class="text"><strong>Score trend over time</strong> (improving or declining)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MAHA Rating -->
+        <div class="category">
+            <div class="category-header">
+                <span>🩺</span>
+                <h2>MAHA Rating (Health Freedom Score) <span class="highlight-badge badge-new">New</span></h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">📊</span><span class="text"><strong>MAHA Daily health freedom rating</strong></span></li>
+                    <li><span class="icon">💉</span><span class="text"><strong>Position on vaccine mandates</strong></span></li>
+                    <li><span class="icon">⚕️</span><span class="text"><strong>Position on medical freedom legislation</strong></span></li>
+                    <li><span class="icon">🏛️</span><span class="text"><strong>Position on FDA/CDC reform</strong></span></li>
+                    <li><span class="icon">💊</span><span class="text"><strong>Position on Big Pharma accountability</strong></span></li>
+                    <li><span class="icon">🤝</span><span class="text"><strong>RFK Jr. / CHD alignment indicator</strong></span></li>
+                    <li><span class="icon">🗳️</span><span class="text"><strong>Health freedom voting record</strong> (if incumbent)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Trojan Horse Warning -->
+        <div class="category">
+            <div class="category-header">
+                <span>⚠️</span>
+                <h2>Trojan Horse Warning System <span class="highlight-badge badge-proprietary">Proprietary</span></h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Voting record contradicts campaign rhetoric</span></li>
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Heavy establishment/corporate PAC funding (over 50%)</span></li>
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Past statements contradict current positions</span></li>
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Connections to anti-MAGA organizations</span></li>
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Endorsed by establishment figures who oppose Trump</span></li>
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Donor ties to George Soros network</span></li>
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Donor ties to BlackRock, Vanguard, State Street</span></li>
+                    <li><span class="icon">🚨</span><span class="text"><strong>RED FLAG:</strong> Previous support for impeachment or J6 prosecutions</span></li>
+                    <li><span class="icon">⚠️</span><span class="text"><strong>YELLOW FLAG:</strong> Limited public record on key issues</span></li>
+                    <li><span class="icon">⚠️</span><span class="text"><strong>YELLOW FLAG:</strong> Recent party switch or position changes</span></li>
+                    <li><span class="icon">✅</span><span class="text"><strong>VERIFIED MAGA badge</strong> for candidates with clean records</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Campaign Finance -->
+        <div class="category">
+            <div class="category-header">
+                <span>💵</span>
+                <h2>Campaign Finance Data (FEC + OpenSecrets)</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">💰</span><span class="text"><strong>Total funds raised</strong> (current cycle)</span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>Total funds raised</strong> (career)</span></li>
+                    <li><span class="icon">🏦</span><span class="text"><strong>Cash on hand</strong></span></li>
+                    <li><span class="icon">🔥</span><span class="text"><strong>Burn rate</strong> (spending per month)</span></li>
+                    <li><span class="icon">👥</span><span class="text"><strong>Small-dollar donation percentage</strong> (under $200)</span></li>
+                    <li><span class="icon">💎</span><span class="text"><strong>Large-dollar donation percentage</strong> (over $2,800)</span></li>
+                    <li><span class="icon">🏆</span><span class="text"><strong>Top 10 individual donors</strong> with names and amounts</span></li>
+                    <li><span class="icon">🏢</span><span class="text"><strong>Top 10 PAC contributors</strong> with names and amounts</span></li>
+                    <li><span class="icon">🏛️</span><span class="text"><strong>Corporate PAC money total</strong></span></li>
+                    <li><span class="icon">👔</span><span class="text"><strong>Leadership PAC contributions</strong></span></li>
+                    <li><span class="icon">💵</span><span class="text"><strong>Self-funding amount</strong> (if any)</span></li>
+                    <li><span class="icon">📢</span><span class="text"><strong>Outside spending supporting candidate</strong> (Super PACs)</span></li>
+                    <li><span class="icon">⚔️</span><span class="text"><strong>Outside spending opposing candidate</strong></span></li>
+                    <li><span class="icon">🤝</span><span class="text"><strong>Bundler networks identified</strong></span></li>
+                    <li><span class="icon">🏭</span><span class="text"><strong>Employer/industry breakdown</strong> of donors</span></li>
+                    <li><span class="icon">🗺️</span><span class="text"><strong>Geographic breakdown</strong> (in-state vs. out-of-state)</span></li>
+                    <li><span class="icon">📈</span><span class="text"><strong>Quarterly fundraising trends</strong></span></li>
+                    <li><span class="icon">🆚</span><span class="text"><strong>Comparison to opponent fundraising</strong></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- NGO and Corruption -->
+        <div class="category">
+            <div class="category-header">
+                <span>🔍</span>
+                <h2>NGO and Corruption Ties (Deep Research)</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">💸</span><span class="text"><strong>Connections to Soros-funded organizations</strong></span></li>
+                    <li><span class="icon">🌐</span><span class="text"><strong>Connections to WEF</strong> (World Economic Forum)</span></li>
+                    <li><span class="icon">🏛️</span><span class="text"><strong>Connections to Council on Foreign Relations</strong></span></li>
+                    <li><span class="icon">🎩</span><span class="text"><strong>Connections to Bilderberg attendees</strong></span></li>
+                    <li><span class="icon">💻</span><span class="text"><strong>Connections to Big Tech funding</strong></span></li>
+                    <li><span class="icon">💊</span><span class="text"><strong>Connections to pharmaceutical industry</strong></span></li>
+                    <li><span class="icon">🛡️</span><span class="text"><strong>Connections to defense contractor lobbying</strong></span></li>
+                    <li><span class="icon">🌍</span><span class="text"><strong>Any registered foreign agent (FARA) connections</strong></span></li>
+                    <li><span class="icon">📋</span><span class="text"><strong>Any lobbying disclosures</strong></span></li>
+                    <li><span class="icon">⚖️</span><span class="text"><strong>Any ethics complaints or investigations</strong></span></li>
+                    <li><span class="icon">⚠️</span><span class="text"><strong>Any legal issues or pending cases</strong></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Voting Record -->
+        <div class="category">
+            <div class="category-header">
+                <span>🗳️</span>
+                <h2>Voting Record Analysis (Incumbents Only)</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">🎯</span><span class="text"><strong>Trump agenda alignment percentage</strong></span></li>
+                    <li><span class="icon">⭐</span><span class="text"><strong>Key votes highlighted:</strong>
+                        <ul class="sub-list">
+                            <li>• Border security / wall funding</li>
+                            <li>• Immigration enforcement</li>
+                            <li>• Second Amendment legislation</li>
+                            <li>• Pro-life legislation</li>
+                            <li>• Trade and tariff votes</li>
+                            <li>• Big Tech regulation</li>
+                            <li>• COVID policy votes (mandates, lockdowns, funding)</li>
+                            <li>• Foreign aid votes (Ukraine, Israel, etc.)</li>
+                            <li>• Debt ceiling and spending votes</li>
+                            <li>• J6-related votes</li>
+                        </ul>
+                    </span></li>
+                    <li><span class="icon">❌</span><span class="text"><strong>Missed vote percentage</strong></span></li>
+                    <li><span class="icon">📝</span><span class="text"><strong>Bills sponsored and co-sponsored</strong></span></li>
+                    <li><span class="icon">🏛️</span><span class="text"><strong>Committee assignments</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>Heritage Action scorecard</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>NRA rating</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>Susan B. Anthony List rating</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>NumbersUSA immigration rating</strong></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Issue Positions -->
+        <div class="category">
+            <div class="category-header">
+                <span>📋</span>
+                <h2>Issue Positions (Side-by-Side Comparison)</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">🛡️</span><span class="text"><strong>Border Security:</strong> Open / Moderate / Strong / Build Wall</span></li>
+                    <li><span class="icon">🚪</span><span class="text"><strong>Immigration:</strong> Amnesty / Path / Enforcement / Mass Deportation</span></li>
+                    <li><span class="icon">🔫</span><span class="text"><strong>Second Amendment:</strong> Restrict / Status Quo / Expand / Constitutional Carry</span></li>
+                    <li><span class="icon">👶</span><span class="text"><strong>Abortion:</strong> Codify Roe / Exceptions Only / Pro-Life / Personhood</span></li>
+                    <li><span class="icon">🏭</span><span class="text"><strong>Trade Policy:</strong> Free Trade / Fair Trade / Tariffs / America First</span></li>
+                    <li><span class="icon">🌍</span><span class="text"><strong>Foreign Policy:</strong> Interventionist / Moderate / Restrained / America First</span></li>
+                    <li><span class="icon">💉</span><span class="text"><strong>Health Freedom:</strong> Mandate Support / Neutral / Medical Freedom / MAHA Aligned</span></li>
+                    <li><span class="icon">🗳️</span><span class="text"><strong>Election Integrity:</strong> Status Quo / Paper Ballots / Full Reform</span></li>
+                    <li><span class="icon">💻</span><span class="text"><strong>Big Tech:</strong> Status Quo / Section 230 Reform / Break Up</span></li>
+                    <li><span class="icon">🎓</span><span class="text"><strong>Education:</strong> Status Quo / School Choice / Abolish Dept of Ed</span></li>
+                    <li><span class="icon">⛽</span><span class="text"><strong>Energy:</strong> Green New Deal / All of Above / Drill Baby Drill</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="category">
+            <div class="category-header">
+                <span>📱</span>
+                <h2>Social Media & Sentiment Data</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">🐦</span><span class="text"><strong>X/Twitter follower count</strong> and growth rate</span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>X/Twitter engagement rate</strong></span></li>
+                    <li><span class="icon">😊</span><span class="text"><strong>Sentiment analysis</strong> (positive/negative/neutral mentions)</span></li>
+                    <li><span class="icon">#️⃣</span><span class="text"><strong>Trending hashtags</strong> related to candidate</span></li>
+                    <li><span class="icon">📢</span><span class="text"><strong>Truth Social presence</strong> (if any)</span></li>
+                    <li><span class="icon">🎥</span><span class="text"><strong>Rumble presence</strong> (if any)</span></li>
+                    <li><span class="icon">⚡</span><span class="text"><strong>Viral moments or controversies</strong></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Google Trends -->
+        <div class="category">
+            <div class="category-header">
+                <span>🔍</span>
+                <h2>Google Trends Data</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">📈</span><span class="text"><strong>Search interest over time</strong> (7-day, 30-day, 90-day)</span></li>
+                    <li><span class="icon">🗺️</span><span class="text"><strong>Search interest by region/state</strong></span></li>
+                    <li><span class="icon">🔗</span><span class="text"><strong>Related search queries</strong></span></li>
+                    <li><span class="icon">🆚</span><span class="text"><strong>Comparison to opponent</strong> search interest</span></li>
+                    <li><span class="icon">🚀</span><span class="text"><strong>Breakout search terms</strong></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- News -->
+        <div class="category">
+            <div class="category-header">
+                <span>📰</span>
+                <h2>News Aggregation</h2>
+            </div>
+            <div class="category-content">
+                <ul class="data-list">
+                    <li><span class="icon">📰</span><span class="text"><strong>Latest headlines</strong> mentioning candidate</span></li>
+                    <li><span class="icon">🔍</span><span class="text"><strong>Source filtering</strong> (friendly, neutral, hostile)</span></li>
+                    <li><span class="icon">🔥</span><span class="text"><strong>Breitbart coverage</strong></span></li>
+                    <li><span class="icon">📺</span><span class="text"><strong>Daily Wire coverage</strong></span></li>
+                    <li><span class="icon">🎙️</span><span class="text"><strong>War Room mentions</strong></span></li>
+                    <li><span class="icon">📰</span><span class="text"><strong>Gateway Pundit coverage</strong></span></li>
+                    <li><span class="icon">📰</span><span class="text"><strong>Epoch Times coverage</strong></span></li>
+                    <li><span class="icon">🏠</span><span class="text"><strong>Local news coverage</strong></span></li>
+                    <li><span class="icon">📊</span><span class="text"><strong>Headline sentiment analysis</strong></span></li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p><strong>CONFIDENTIAL & PROPRIETARY</strong> © 2026 Noetic Dharma Group, LLC</p>
+    </footer>
+
+    <script>
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Markets | War Room Scoreboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #1e3a5f;
+            --navy-medium: #2c5282;
+            --gop-red: #c53030;
+            --accent-gold: #d69e2e;
+            --success: #38a169;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            padding: 1rem 2rem;
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover { color: var(--accent-gold); }
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: white;
+        }
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        .page-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .intro-card {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        .intro-card h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        .intro-card p {
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .market-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .market-header {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .market-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        .market-logo.polymarket { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+        .market-logo.predictit { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .market-logo.kalshi { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .market-logo.metaculus { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .market-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--navy-dark);
+        }
+        .market-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .market-content {
+            padding: 1.5rem;
+        }
+        .market-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-box {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy-dark);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .market-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .feature-tag {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(44, 82, 130, 0.1);
+            color: var(--navy-medium);
+            border-radius: 15px;
+        }
+        .api-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: rgba(56, 161, 105, 0.15);
+            color: var(--success);
+        }
+        .why-markets {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .why-markets h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .benefit-item {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        .benefit-icon {
+            font-size: 1.5rem;
+        }
+        .benefit-text h4 {
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.25rem;
+        }
+        .benefit-text p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+            <h1>🦅 WAR ROOM SCOREBOARD</h1>
+            <div></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>📈 Prediction Markets</h1>
+            <p>Real-money forecasting platforms integrated into the War Room Scoreboard</p>
+        </div>
+
+        <div class="intro-card">
+            <h2>💡 Why Prediction Markets Matter</h2>
+            <p>
+                Prediction markets aggregate the collective wisdom of thousands of traders putting real money on electoral outcomes. 
+                Unlike polls (which measure opinion), markets measure <strong>expected probability</strong> - often more accurate than polling averages.
+                In 2024, Polymarket correctly called 49 of 50 states before the mainstream media.
+            </p>
+        </div>
+
+        <div class="market-grid">
+            <!-- Polymarket -->
+            <div class="market-card">
+                <div class="market-header">
+                    <div class="market-logo polymarket">📊</div>
+                    <div>
+                        <div class="market-name">Polymarket</div>
+                        <div class="market-type">Crypto-Based • Global</div>
+                    </div>
+                </div>
+                <div class="market-content">
+                    <p class="market-desc">
+                        The largest prediction market by volume. Uses cryptocurrency (USDC) for trading. 
+                        Not available to US users directly but prices are public. <strong>Highest liquidity = most accurate odds.</strong>
+                    </p>
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="stat-value">$2B+</div>
+                            <div class="stat-label">2024 Election Volume</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">Real-time</div>
+                            <div class="stat-label">Data Updates</div>
+                        </div>
+                    </div>
+                    <div class="market-features">
+                        <span class="feature-tag">Senate Control</span>
+                        <span class="feature-tag">House Control</span>
+                        <span class="feature-tag">Individual Races</span>
+                        <span class="api-badge">FREE API</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PredictIt -->
+            <div class="market-card">
+                <div class="market-header">
+                    <div class="market-logo predictit">🎰</div>
+                    <div>
+                        <div class="market-name">PredictIt</div>
+                        <div class="market-type">CFTC Regulated • US Legal</div>
+                    </div>
+                </div>
+                <div class="market-content">
+                    <p class="market-desc">
+                        The original US-legal prediction market (via academic exemption). Prices shown in cents (52¢ = 52% probability).
+                        Lower volume than Polymarket but <strong>legal for US users</strong> and highly trusted.
+                    </p>
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="stat-value">$850/race</div>
+                            <div class="stat-label">Max Position</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">Real-time</div>
+                            <div class="stat-label">Data Updates</div>
+                        </div>
+                    </div>
+                    <div class="market-features">
+                        <span class="feature-tag">All 2026 Markets</span>
+                        <span class="feature-tag">US Legal</span>
+                        <span class="feature-tag">Long Track Record</span>
+                        <span class="api-badge">FREE API</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kalshi -->
+            <div class="market-card">
+                <div class="market-header">
+                    <div class="market-logo kalshi">⚖️</div>
+                    <div>
+                        <div class="market-name">Kalshi</div>
+                        <div class="market-type">CFTC Regulated • US Legal</div>
+                    </div>
+                </div>
+                <div class="market-content">
+                    <p class="market-desc">
+                        First fully CFTC-regulated prediction market exchange. Legal for all US users. 
+                        Election markets approved in 2024. Growing rapidly as the "legitimate" option.
+                    </p>
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="stat-value">Unlimited</div>
+                            <div class="stat-label">Position Size</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">Regulated</div>
+                            <div class="stat-label">CFTC Approved</div>
+                        </div>
+                    </div>
+                    <div class="market-features">
+                        <span class="feature-tag">CFTC Regulated</span>
+                        <span class="feature-tag">No Limits</span>
+                        <span class="feature-tag">Growing Fast</span>
+                        <span class="api-badge">API Available</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metaculus -->
+            <div class="market-card">
+                <div class="market-header">
+                    <div class="market-logo metaculus">🔮</div>
+                    <div>
+                        <div class="market-name">Metaculus</div>
+                        <div class="market-type">Forecasting Platform • No Money</div>
+                    </div>
+                </div>
+                <div class="market-content">
+                    <p class="market-desc">
+                        Not a real-money market but a reputation-based forecasting platform. 
+                        Users compete for accuracy points. Good for comparison and edge cases not covered by markets.
+                    </p>
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="stat-value">500K+</div>
+                            <div class="stat-label">Forecasters</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">Free</div>
+                            <div class="stat-label">Participation</div>
+                        </div>
+                    </div>
+                    <div class="market-features">
+                        <span class="feature-tag">Reputation Based</span>
+                        <span class="feature-tag">Long-term Forecasts</span>
+                        <span class="api-badge">FREE API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="why-markets">
+            <h2>🎯 How We Use Prediction Markets</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="benefit-icon">📊</span>
+                    <div class="benefit-text">
+                        <h4>Real-Time Odds</h4>
+                        <p>Display current win probability for each candidate, updated every minute.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">📈</span>
+                    <div class="benefit-text">
+                        <h4>Trend Analysis</h4>
+                        <p>Show 24-hour, 7-day, and 30-day movement to spot momentum shifts.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔔</span>
+                    <div class="benefit-text">
+                        <h4>Alert System</h4>
+                        <p>Flag when markets move significantly (±5%) faster than polls update.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">⚖️</span>
+                    <div class="benefit-text">
+                        <h4>Poll vs. Market</h4>
+                        <p>Compare polling averages to market odds - divergence can signal opportunity.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🏆</span>
+                    <div class="benefit-text">
+                        <h4>Control Markets</h4>
+                        <p>Overall Senate and House control odds prominently featured on homepage.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">💰</span>
+                    <div class="benefit-text">
+                        <h4>Volume Indicator</h4>
+                        <p>Higher trading volume = more confident prediction. We show liquidity context.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p><strong>CONFIDENTIAL & PROPRIETARY</strong> © 2026 Noetic Dharma Group, LLC</p>
+    </footer>
+
+    <script>
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

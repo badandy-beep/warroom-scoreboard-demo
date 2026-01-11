@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polling Sources | War Room Scoreboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #1e3a5f;
+            --navy-medium: #2c5282;
+            --gop-red: #c53030;
+            --accent-gold: #d69e2e;
+            --success: #38a169;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            padding: 1rem 2rem;
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover { color: var(--accent-gold); }
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: white;
+        }
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        .page-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .pollster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        .pollster-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .pollster-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .pollster-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--navy-dark);
+        }
+        .pollster-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--navy-dark);
+        }
+        .pollster-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge.friendly {
+            background: rgba(56, 161, 105, 0.15);
+            color: var(--success);
+        }
+        .badge.neutral {
+            background: rgba(214, 158, 46, 0.15);
+            color: var(--accent-gold);
+        }
+        .badge.hostile {
+            background: rgba(197, 48, 48, 0.15);
+            color: var(--gop-red);
+        }
+        .badge.aggregator {
+            background: rgba(44, 82, 130, 0.15);
+            color: var(--navy-medium);
+        }
+        .pollster-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .pollster-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .meta-item {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: #f8fafc;
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+        }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gop-red);
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+            <h1>🦅 WAR ROOM SCOREBOARD</h1>
+            <div></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>📊 Polling Sources</h1>
+            <p>Traditional and alternative polling organizations tracked by the War Room Scoreboard</p>
+        </div>
+
+        <h2 class="section-title">⭐ MAGA-Friendly Pollsters</h2>
+        <div class="pollster-grid">
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">📈</div>
+                    <div>
+                        <div class="pollster-name">Rasmussen Reports</div>
+                        <div class="pollster-type">Daily Tracking</div>
+                    </div>
+                    <span class="badge friendly">Friendly</span>
+                </div>
+                <p class="pollster-desc">
+                    Gold standard for likely voter polling. Uses rigorous likely voter screen that historically favors accurate GOP turnout modeling. Daily tracking polls provide real-time movement. <strong>Specialized partnership recommended.</strong>
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">📅 Daily Updates</span>
+                    <span class="meta-item">🗳️ Likely Voters</span>
+                    <span class="meta-item">🎯 High Accuracy</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">🎯</div>
+                    <div>
+                        <div class="pollster-name">Trafalgar Group</div>
+                        <div class="pollster-type">State Polling</div>
+                    </div>
+                    <span class="badge friendly">Friendly</span>
+                </div>
+                <p class="pollster-desc">
+                    Known for capturing "shy Trump voter" effect. Uses proprietary methodology to identify voters who don't respond to traditional polls. Correctly predicted 2016 and 2020 swing states when others missed.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">🔮 Shy Voter Model</span>
+                    <span class="meta-item">🗺️ Swing States</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">📊</div>
+                    <div>
+                        <div class="pollster-name">InsiderAdvantage</div>
+                        <div class="pollster-type">State Polling</div>
+                    </div>
+                    <span class="badge friendly">Friendly</span>
+                </div>
+                <p class="pollster-desc">
+                    Southeast-focused pollster with strong track record in Georgia, Florida, and North Carolina. Led by Matt Towery. Quick turnaround on breaking news polling.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">🍑 Southeast Focus</span>
+                    <span class="meta-item">⚡ Fast Turnaround</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">🏛️</div>
+                    <div>
+                        <div class="pollster-name">McLaughlin & Associates</div>
+                        <div class="pollster-type">GOP Pollster</div>
+                    </div>
+                    <span class="badge friendly">Friendly</span>
+                </div>
+                <p class="pollster-desc">
+                    Official Trump campaign pollster. Deep Republican Party relationships. Provides internal-quality polling on key races. May have exclusive data not publicly released.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">🐘 GOP Official</span>
+                    <span class="meta-item">🔒 Internal Quality</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📈 Polling Aggregators</h2>
+        <div class="pollster-grid">
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">📰</div>
+                    <div>
+                        <div class="pollster-name">RealClearPolitics</div>
+                        <div class="pollster-type">Aggregator</div>
+                    </div>
+                    <span class="badge aggregator">Aggregator</span>
+                </div>
+                <p class="pollster-desc">
+                    Most widely cited polling average. Includes all major polls. Simple averaging methodology (no weighting). Race ratings (Toss-Up, Lean R, etc.) are industry standard.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">📊 Simple Average</span>
+                    <span class="meta-item">🏆 Industry Standard</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">🔢</div>
+                    <div>
+                        <div class="pollster-name">FiveThirtyEight</div>
+                        <div class="pollster-type">Aggregator</div>
+                    </div>
+                    <span class="badge hostile">Hostile</span>
+                </div>
+                <p class="pollster-desc">
+                    ⚠️ Known anti-MAGA bias. Uses weighted averaging that systematically underweights conservative-leaning polls. Track for reference only - do not feature prominently.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">⚠️ Biased Weighting</span>
+                    <span class="meta-item">📉 Track Only</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">🗳️</div>
+                    <div>
+                        <div class="pollster-name">Race to the WH</div>
+                        <div class="pollster-type">Aggregator</div>
+                    </div>
+                    <span class="badge neutral">Neutral</span>
+                </div>
+                <p class="pollster-desc">
+                    Alternative aggregator with electoral college focus. Includes prediction market data alongside polling. Good backup source for RCP.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">🗺️ EC Focus</span>
+                    <span class="meta-item">📈 Includes Markets</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🏢 Major Institutional Pollsters</h2>
+        <div class="pollster-grid">
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">🎓</div>
+                    <div>
+                        <div class="pollster-name">Emerson College</div>
+                        <div class="pollster-type">Academic</div>
+                    </div>
+                    <span class="badge neutral">Neutral</span>
+                </div>
+                <p class="pollster-desc">
+                    Academic pollster with good track record. Uses mixed-mode methodology (phone + online). Generally accurate in competitive races. Releases frequently.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">🎓 Academic</span>
+                    <span class="meta-item">📱 Mixed Mode</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">🏛️</div>
+                    <div>
+                        <div class="pollster-name">Monmouth University</div>
+                        <div class="pollster-type">Academic</div>
+                    </div>
+                    <span class="badge neutral">Neutral</span>
+                </div>
+                <p class="pollster-desc">
+                    Highly rated academic pollster. Known for methodological rigor. Sometimes shows slight Democratic lean but generally reliable.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">🎓 Academic</span>
+                    <span class="meta-item">📊 Rigorous</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">📺</div>
+                    <div>
+                        <div class="pollster-name">Fox News Poll</div>
+                        <div class="pollster-type">Media</div>
+                    </div>
+                    <span class="badge neutral">Neutral</span>
+                </div>
+                <p class="pollster-desc">
+                    Despite Fox News branding, the Fox News Poll is conducted by a bipartisan team (D + R pollsters together). Often shows slightly more Democratic results than expected.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">📺 Media Poll</span>
+                    <span class="meta-item">🤝 Bipartisan Team</span>
+                </div>
+            </div>
+
+            <div class="pollster-card">
+                <div class="pollster-header">
+                    <div class="pollster-logo">☀️</div>
+                    <div>
+                        <div class="pollster-name">Morning Consult</div>
+                        <div class="pollster-type">Online Panel</div>
+                    </div>
+                    <span class="badge neutral">Neutral</span>
+                </div>
+                <p class="pollster-desc">
+                    Large-sample online pollster. Tracks all 50 states continuously. Good for trend analysis over time. May oversample Democrats in online panel.
+                </p>
+                <div class="pollster-meta">
+                    <span class="meta-item">🌐 Online</span>
+                    <span class="meta-item">🗺️ 50-State</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p><strong>CONFIDENTIAL & PROPRIETARY</strong> © 2026 Noetic Dharma Group, LLC</p>
+    </footer>
+
+    <script>
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

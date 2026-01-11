@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sources | War Room Scoreboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #1e3a5f;
+            --navy-medium: #2c5282;
+            --gop-red: #c53030;
+            --accent-gold: #d69e2e;
+            --success: #38a169;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link:hover { color: var(--accent-gold); }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .category-section {
+            margin-bottom: 2rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--navy-dark);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .category-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .api-table {
+            width: 100%;
+            background: white;
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .api-table th {
+            background: #f8fafc;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .api-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .api-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .api-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .api-name {
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .api-url {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--navy-medium);
+            word-break: break-all;
+        }
+
+        .cost-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .cost-badge.free {
+            background: rgba(56, 161, 105, 0.15);
+            color: var(--success);
+        }
+
+        .cost-badge.paid {
+            background: rgba(214, 158, 46, 0.15);
+            color: var(--accent-gold);
+        }
+
+        .cost-badge.premium {
+            background: rgba(197, 48, 48, 0.15);
+            color: var(--gop-red);
+        }
+
+        .data-provided {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .update-freq {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .summary-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .cost-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tier-card {
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+
+        .tier-card.recommended {
+            border-color: var(--success);
+            background: rgba(56, 161, 105, 0.05);
+        }
+
+        .tier-name {
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .tier-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            color: var(--navy-medium);
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .api-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+            <h1>🦅 WAR ROOM SCOREBOARD</h1>
+            <div></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>📡 Data Sources & API Feeds</h1>
+            <p>Complete documentation of all data integrations powering the War Room Scoreboard</p>
+        </div>
+
+        <!-- Cost Summary -->
+        <div class="summary-card">
+            <h3>💰 Estimated Monthly Costs by Tier</h3>
+            <div class="cost-tiers">
+                <div class="tier-card">
+                    <div class="tier-name">Tier 1: MVP Launch</div>
+                    <div class="tier-price">~$200/month</div>
+                    <div class="tier-desc">All free APIs + Basic X/Twitter</div>
+                </div>
+                <div class="tier-card recommended">
+                    <div class="tier-name">Tier 2: Professional ⭐</div>
+                    <div class="tier-price">~$1,750/month</div>
+                    <div class="tier-desc">Full APIs + Rasmussen partnership + unlimited news</div>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-name">Tier 3: Enterprise</div>
+                    <div class="tier-price">$10,000+/month</div>
+                    <div class="tier-desc">Custom polling + all premium sources</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campaign Finance APIs -->
+        <div class="category-section">
+            <div class="category-header">
+                <span>💵</span>
+                <h2>Campaign Finance Data</h2>
+            </div>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Cost</th>
+                        <th>Data Provided</th>
+                        <th>Update Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="api-name">FEC API</div>
+                            <div class="api-url">api.open.fec.gov</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">All campaign finance filings, individual donations, PAC contributions, expenditures, candidate financial summaries</td>
+                        <td class="update-freq">Daily</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">ProPublica Campaign Finance</div>
+                            <div class="api-url">propublica.org/datastore/api</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Pre-processed FEC data, easier queries, historical comparisons</td>
+                        <td class="update-freq">Daily</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">OpenSecrets API</div>
+                            <div class="api-url">opensecrets.org/api</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Donor analysis, industry breakdowns, PAC relationships, "follow the money" data, lobbying connections</td>
+                        <td class="update-freq">Quarterly + major filings</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Voting Records -->
+        <div class="category-section">
+            <div class="category-header">
+                <span>🗳️</span>
+                <h2>Voting Records & Congress Data</h2>
+            </div>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Cost</th>
+                        <th>Data Provided</th>
+                        <th>Update Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="api-name">ProPublica Congress API</div>
+                            <div class="api-url">propublica.org/datastore/api</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Roll call votes, bill sponsorship, co-sponsors, committee memberships, voting patterns</td>
+                        <td class="update-freq">Real-time during sessions</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">GovTrack API</div>
+                            <div class="api-url">govtrack.us/developers/api</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Complete voting history, bill tracking, legislative analysis, ideology scores</td>
+                        <td class="update-freq">Real-time</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">VoteSmart API</div>
+                            <div class="api-url">votesmart.org/share/api</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Candidate positions, interest group ratings (NRA, Susan B. Anthony, etc.), biographical data</td>
+                        <td class="update-freq">Periodically</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Prediction Markets -->
+        <div class="category-section">
+            <div class="category-header">
+                <span>📈</span>
+                <h2>Prediction Markets</h2>
+            </div>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Cost</th>
+                        <th>Data Provided</th>
+                        <th>Update Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="api-name">Polymarket API</div>
+                            <div class="api-url">docs.polymarket.com</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE (1K/hr)</span></td>
+                        <td class="data-provided">Real-time election odds, market volumes, historical price data, order book depth</td>
+                        <td class="update-freq">Real-time</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">PredictIt API</div>
+                            <div class="api-url">predictit.org/api/marketdata/all/</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">All 2026 race markets, contract prices (cents), buy/sell prices, volume</td>
+                        <td class="update-freq">Real-time</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">Kalshi API</div>
+                            <div class="api-url">kalshi.com (regulated)</div>
+                        </td>
+                        <td><span class="cost-badge paid">Contact</span></td>
+                        <td class="data-provided">CFTC-regulated prediction markets, election contracts where available</td>
+                        <td class="update-freq">Real-time</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Polling Data -->
+        <div class="category-section">
+            <div class="category-header">
+                <span>📊</span>
+                <h2>Polling Data</h2>
+            </div>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Cost</th>
+                        <th>Data Provided</th>
+                        <th>Update Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="api-name">RealClearPolitics</div>
+                            <div class="api-url">realclearpolitics.com</div>
+                        </td>
+                        <td><span class="cost-badge paid">Partnership/Scrape</span></td>
+                        <td class="data-provided">Polling averages, individual poll results, race ratings, historical trends</td>
+                        <td class="update-freq">Daily</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">Rasmussen Reports</div>
+                            <div class="api-url">rasmussenreports.com</div>
+                        </td>
+                        <td><span class="cost-badge premium">$500-2K/mo</span></td>
+                        <td class="data-provided">Daily tracking polls, likely voter models, specialized state polling, exclusive data</td>
+                        <td class="update-freq">Daily</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Social & News -->
+        <div class="category-section">
+            <div class="category-header">
+                <span>📰</span>
+                <h2>Social Media & News</h2>
+            </div>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Cost</th>
+                        <th>Data Provided</th>
+                        <th>Update Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="api-name">X/Twitter API</div>
+                            <div class="api-url">developer.x.com</div>
+                        </td>
+                        <td><span class="cost-badge premium">$200-5K/mo</span></td>
+                        <td class="data-provided">Mentions, sentiment analysis, trending topics, follower data, engagement metrics</td>
+                        <td class="update-freq">Real-time</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">TwitterAPI.io (Alternative)</div>
+                            <div class="api-url">twitterapi.io</div>
+                        </td>
+                        <td><span class="cost-badge paid">~$300/mo</span></td>
+                        <td class="data-provided">Same X data at 97% lower cost - mentions, sentiment, trending</td>
+                        <td class="update-freq">Real-time</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">NewsAPI</div>
+                            <div class="api-url">newsapi.org</div>
+                        </td>
+                        <td><span class="cost-badge paid">FREE-$449/mo</span></td>
+                        <td class="data-provided">Headlines from 80,000+ sources, keyword search, source filtering</td>
+                        <td class="update-freq">Real-time</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">GDELT Project</div>
+                            <div class="api-url">gdeltproject.org</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Global news monitoring, sentiment analysis, event tracking</td>
+                        <td class="update-freq">15-minute updates</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">Google Trends (pytrends)</div>
+                            <div class="api-url">Python library</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Search interest over time, related queries, geographic breakdown</td>
+                        <td class="update-freq">On-demand</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Candidate Data -->
+        <div class="category-section">
+            <div class="category-header">
+                <span>👤</span>
+                <h2>Candidate Information</h2>
+            </div>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Cost</th>
+                        <th>Data Provided</th>
+                        <th>Update Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="api-name">Ballotpedia</div>
+                            <div class="api-url">ballotpedia.org</div>
+                        </td>
+                        <td><span class="cost-badge paid">Partnership</span></td>
+                        <td class="data-provided">Candidate bios, positions, election history, district information</td>
+                        <td class="update-freq">Continuous</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="api-name">FEC Candidate Data</div>
+                            <div class="api-url">api.open.fec.gov</div>
+                        </td>
+                        <td><span class="cost-badge free">FREE</span></td>
+                        <td class="data-provided">Official candidate filings, committee information, contact details</td>
+                        <td class="update-freq">As filed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p><strong>CONFIDENTIAL & PROPRIETARY</strong> © 2026 Noetic Dharma Group, LLC</p>
+    </footer>
+
+    <script>
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
