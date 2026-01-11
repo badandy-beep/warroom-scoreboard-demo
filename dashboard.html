@@ -132,6 +132,45 @@
             margin-bottom: 2rem;
         }
 
+        .ip-banner {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(214, 158, 46, 0.2);
+        }
+
+        .ip-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .ip-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .ip-text h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .ip-text p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .ip-text strong {
+            color: #ffffff;
+        }
+
         .card {
             background: white;
             border-radius: 16px;
@@ -303,6 +342,17 @@
     </div>
 
     <main class="main-content">
+        <!-- IP Attribution Banner -->
+        <section class="ip-banner">
+            <div class="ip-content">
+                <div class="ip-icon">⚡</div>
+                <div class="ip-text">
+                    <h3>Noetic Dharma Group Intellectual Property</h3>
+                    <p>This platform concept has been seed funded and developed by donor <strong>Dr. Gary Kompothecras</strong> in partnership with Noetic Dharma Group, LLC. All designs, systems, and methodologies contained herein are proprietary assets of NDG.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Welcome Section -->
         <section class="welcome-section">
             <h2>👋 Welcome to the Confidential Preview</h2>
@@ -441,7 +491,8 @@
 
     <footer class="footer">
         <p>
-            <strong>CONFIDENTIAL & PROPRIETARY</strong><br>
+            <strong>CONFIDENTIAL & PROPRIETARY — NOETIC DHARMA GROUP INTELLECTUAL PROPERTY</strong><br>
+            Conceptually seed funded and developed by Dr. Gary Kompothecras<br>
             © 2026 <a href="https://www.noeticdharma.com" target="_blank">Noetic Dharma Group, LLC</a> | Teton Village, Wyoming<br>
             Unauthorized distribution prohibited.
         </p>
