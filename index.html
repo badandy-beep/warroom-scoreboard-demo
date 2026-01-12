@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>War Room Midterm Scoreboard 2026 | Confidential Portal</title>
+    <title>War Room Midterm Scoreboard 2026 | Demo Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -208,18 +208,18 @@
             line-height: 1.2;
         }
 
-        /* Password Section */
-        .password-section {
+        /* Enter Section (no password) */
+        .enter-section {
             margin-top: 2rem;
             padding-top: 1.5rem;
             border-top: 1px solid #cbd5e0;
         }
 
-        .confidential-badge {
+        .demo-badge {
             display: inline-block;
-            background: rgba(197, 48, 48, 0.1);
-            border: 2px solid var(--gop-red);
-            color: var(--gop-red);
+            background: rgba(30, 58, 95, 0.1);
+            border: 2px solid var(--navy-dark);
+            color: var(--navy-dark);
             padding: 0.5rem 1.25rem;
             border-radius: 25px;
             font-size: 1rem;
@@ -229,48 +229,11 @@
             margin-bottom: 1.5rem;
         }
 
-        .password-label {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        .password-input {
-            width: 100%;
-            max-width: 320px;
-            padding: 1.1rem 1.5rem;
-            font-size: 1.3rem;
-            border: 2px solid #cbd5e0;
-            border-radius: 12px;
-            text-align: center;
-            font-family: 'Source Sans 3', sans-serif;
-            letter-spacing: 4px;
-            transition: border-color 0.2s;
-            background: white;
-        }
-
-        .password-input:focus {
-            outline: none;
-            border-color: var(--navy-medium);
-        }
-
-        .password-input.error {
-            border-color: var(--gop-red);
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
         .enter-btn {
             display: block;
             width: 100%;
             max-width: 320px;
-            margin: 1.25rem auto 0;
+            margin: 1rem auto 0;
             padding: 1.1rem 2rem;
             background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
             color: white;
@@ -282,23 +245,12 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
         }
 
         .enter-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(30, 58, 95, 0.4);
-        }
-
-        .error-message {
-            color: var(--gop-red);
-            font-size: 1rem;
-            margin-top: 1rem;
-            display: none;
-            font-weight: 600;
-        }
-
-        .error-message.visible {
-            display: block;
         }
 
         /* Footer Disclaimer */
@@ -400,13 +352,10 @@
                     </div>
                 </div>
 
-                <!-- Password Section -->
-                <div class="password-section">
-                    <div class="confidential-badge">🔒 Confidential Access</div>
-                    <p class="password-label">Enter Access Code</p>
-                    <input type="password" id="passwordInput" class="password-input" placeholder="••••••" autocomplete="off">
-                    <button id="enterBtn" class="enter-btn">Enter Portal</button>
-                    <p id="errorMsg" class="error-message">Invalid access code. Please try again.</p>
+                <!-- Enter Section - NO PASSWORD -->
+                <div class="enter-section">
+                    <div class="demo-badge">Demo Preview</div>
+                    <a href="dashboard.html" class="enter-btn">Enter Portal</a>
                 </div>
             </div>
         </div>
@@ -418,40 +367,5 @@
         Unauthorized access, reproduction, or distribution is strictly prohibited and may result in civil and criminal penalties. 
         © 2026 Noetic Dharma Group, LLC | Teton Village, Wyoming | <a href="https://www.noeticdharma.com" target="_blank">www.noeticdharma.com</a>
     </footer>
-
-    <script>
-        const PASSWORD = 'BANNON';
-        const passwordInput = document.getElementById('passwordInput');
-        const enterBtn = document.getElementById('enterBtn');
-        const errorMsg = document.getElementById('errorMsg');
-
-        // Check if already authenticated
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            window.location.href = 'dashboard.html';
-        }
-
-        function attemptLogin() {
-            const entered = passwordInput.value.toUpperCase().trim();
-            if (entered === PASSWORD) {
-                sessionStorage.setItem('authenticated', 'true');
-                window.location.href = 'dashboard.html';
-            } else {
-                passwordInput.classList.add('error');
-                errorMsg.classList.add('visible');
-                setTimeout(() => {
-                    passwordInput.classList.remove('error');
-                }, 500);
-            }
-        }
-
-        enterBtn.addEventListener('click', attemptLogin);
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') attemptLogin();
-        });
-
-        passwordInput.addEventListener('input', () => {
-            errorMsg.classList.remove('visible');
-        });
-    </script>
 </body>
 </html>
